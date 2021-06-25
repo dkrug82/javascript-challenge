@@ -25,37 +25,43 @@ tableBuild(tableData);
 
 //created myFilter function to filter dataset by user inputted date
 function myFilter() {
-        //created empty object 
+        //created empty object
         var conditions = {};
+
+        //set data to new variable
         var filterData = tableData;
+
+        //got the value for the user input for date and pushed it to the empty object
         var date = d3.select('#datetime').property('value');
-        //console.log(date)
         if(date) {conditions.datetime = date;}
-        
+
+        //got the value for the user input for city and pushed it to the empty object
         var cityIn = d3.select('#city').property('value').toLowerCase();
         if(cityIn){conditions.city = cityIn;}
-    
+
+        //got the value for the user input for state and pushed it to the empty object
         var stateIn = d3.select('#state').property('value').toLowerCase();
-        if(stateIn){conditions.state = stateIn} 
-    
+        if(stateIn){conditions.state = stateIn}
+
+        //got the value for the user input for country and pushed it to the empty object
         var countryIn = d3.select('#country').property('value').toLowerCase();
         if(countryIn) {conditions.country = countryIn}
-    
+
+        //got the value for the user input for shape and pushed it to the empty object
         var shapeIn = d3.select('#shape').property('value').toLowerCase();
         if(shapeIn) {conditions.shape = shapeIn}
     
         console.log(conditions); 
-         
+
+            //itrated throught he conditions object to filter the dataset by each key and value
             Object.entries(conditions).forEach(([key, value]) => {
                 console.log(key);
                 console.log(value);
                 filterData = filterData.filter(row => row[key] === value);
-    
-                console.log(filterData);
-                
+                console.log(filterData);  
             });
             
-    //called the function with the filtered data from the dat.js file
+    //called the function with the filtered data from the data.js file
     tableBuild(filterData);
 }
 //set up event lister to apply the filter on a click of the filter button
